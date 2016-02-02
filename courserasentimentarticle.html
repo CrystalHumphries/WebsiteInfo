@@ -9,15 +9,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="" />
-  <meta name="author" content="Data Mining in Seattle" />
-  <meta name="description" content="" />
+<meta name="author" content="Data Mining in Seattle" />
+<meta name="description" content="import graphlab Read some product review data products = graphlab.SFrame("/Users/zephryin/Desktop/amazon_baby.gl/") [INFO] [1;32m1448680580 : INFO: (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_FILE to /Users/zephryin/anaconda/envs/dato-env/lib/python2.7/site-packages/certifi/cacert.pem [0m[1;32m1448680580 : INFO: (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_DIR to [0mThis ..." />
+<meta name="keywords" content="">
 <meta property="og:site_name" content="DataScienceUsingRandPython"/>
-<meta property="og:type" content="blog"/>
-<meta property="og:title" content="DataScienceUsingRandPython"/>
-<meta property="og:description" content=""/>
+<meta property="og:title" content="CourseraSentimentArticle"/>
+<meta property="og:description" content="import graphlab Read some product review data products = graphlab.SFrame("/Users/zephryin/Desktop/amazon_baby.gl/") [INFO] [1;32m1448680580 : INFO: (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_FILE to /Users/zephryin/anaconda/envs/dato-env/lib/python2.7/site-packages/certifi/cacert.pem [0m[1;32m1448680580 : INFO: (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_DIR to [0mThis ..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
-  <title>DataScienceUsingRandPython</title>
+<meta property="og:url" content="./courserasentimentarticle.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-02-02 10:02:00-08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/data-mining-in-seattle.html">
+<meta property="article:section" content="misc"/>
+<meta property="og:image" content="">  <title>DataScienceUsingRandPython &ndash; CourseraSentimentArticle</title>
 </head>
 <body>
   <aside>
@@ -51,14 +56,11 @@
 
 <article>
   <header>
-    <h2><a href="./courserasentimentarticle.html#courserasentimentarticle">CourseraSentimentArticle</a></h2>
-    <p>
-      Posted on Tue 02 February 2016 in <a href="./category/misc.html">misc</a> &#8226;
-      &#8226; <a href="./courserasentimentarticle.html#disqus_thread">Leave a comment</a>
-    </p>
+    <h1 id="courserasentimentarticle">CourseraSentimentArticle</h1>
+    <p>Posted on Tue 02 February 2016 in <a href="./category/misc.html">misc</a></p>
   </header>
   <div>
-      <div class="highlight"><pre><span class="kn">import</span> <span class="nn">graphlab</span>
+    <div class="highlight"><pre><span class="kn">import</span> <span class="nn">graphlab</span>
 </pre></div>
 
 
@@ -630,187 +632,21 @@
 <div class="highlight"><pre>
 </pre></div>
   </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="./data-set-my-neighborhood-map.html#data-set-my-neighborhood-map">Data Set: My Neighborhood Map</a></h2>
+  <div class="tag-cloud">
     <p>
-      Posted on Wed 26 August 2015 in <a href="./category/misc.html">misc</a> &#8226;
-Tagged with
-      <a href="./tag/api.html">API</a>,      <a href="./tag/seattlegov.html">Seattle.gov</a>,      <a href="./tag/opensource.html">OpenSource</a>      &#8226; <a href="./data-set-my-neighborhood-map.html#disqus_thread">Leave a comment</a>
     </p>
-  </header>
-  <div>
-      <p>Recently, I have been looking at houses in the Seattle area. It's a
-crazy market here. Interestingly, some areas are increasing at a much
-faster rate than others. I want to see if I can look at the open access
-data on the <a class="reference external" href="https://data.seattle.gov/">https://data.seattle.gov/</a> to see if I can find any useful
-but not so obvious trends with the pricier neighborhoods.</p>
-<p>The data set I will be using for this is: My Neighborhood Map</p>
-<p>Because this is my first entry, I am going for something fairly &quot;easy&quot;,
-that is I want to: * extract information from an API * convert
-latitute and longitude into zip codes * practice working with pandas *
-doing some regression in python * creating a little visualization</p>
-<pre class="code python literal-block">
-<span class="kn">import</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">json</span>
-<span class="n">endpoint</span> <span class="o">=</span> <span class="s2">&quot;https://data.seattle.gov/resource/82su-5fxf.json&quot;</span>
-
-<span class="n">repos</span>    <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="c1"># this reads the data out in a dictionary</span>
-<span class="n">repos</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-</pre>
-<pre class="literal-block">
-[{'address': '1810 NW 65th St',
-  'city_feature': 'Alternative Schools',
-  'common_name': 'Salmon Bay',
-  'latitude': '47.676298',
-  'location': {'latitude': '47.676298',
-   'longitude': '-122.38051',
-   'needs_recoding': False},
-  'longitude': '-122.38051',
-  'website': {'url': '<a class="reference external" href="http://www.salmonbayschool.org/">http://www.salmonbayschool.org/</a>'}},
- {'address': '2500 Franklin Ave E',
-  'city_feature': 'Alternative Schools',
-  'common_name': 'Tops K-8',
-  'latitude': '47.642286',
-  'location': {'latitude': '47.642286',
-   'longitude': '-122.324177',
-   'needs_recoding': False},
-  'longitude': '-122.324177',
-  'website': {'url': '<a class="reference external" href="http://www.topsk8.org/">http://www.topsk8.org/</a>'}}]
-</pre>
-<p>Looking at the data, I see that it's a bit unweildy so instead I will
-put it into a dataframe</p>
-<pre class="code python literal-block">
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">repos</span><span class="p">)</span>
-<span class="n">d</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre>
-<div style="max-height:1000px;max-width:1500px;overflow:auto;">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>address</th>
-      <th>city_feature</th>
-      <th>common_name</th>
-      <th>latitude</th>
-      <th>location</th>
-      <th>longitude</th>
-      <th>website</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>       1121 33rd Ave</td>
-      <td> Alternative Schools</td>
-      <td>   Madrona K-8</td>
-      <td> 47.612237</td>
-      <td> {'longitude': '-122.290868', 'latitude': '47.6...</td>
-      <td> -122.290868</td>
-      <td> {'url': 'http://www.seattleschools.org/schools...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>     1810 NW 65th St</td>
-      <td> Alternative Schools</td>
-      <td>    Salmon Bay</td>
-      <td> 47.676298</td>
-      <td> {'longitude': '-122.38051', 'latitude': '47.67...</td>
-      <td>  -122.38051</td>
-      <td>        {'url': 'http://www.salmonbayschool.org/'}</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td> 2500 Franklin Ave E</td>
-      <td> Alternative Schools</td>
-      <td>      Tops K-8</td>
-      <td> 47.642286</td>
-      <td> {'longitude': '-122.324177', 'latitude': '47.6...</td>
-      <td> -122.324177</td>
-      <td>                 {'url': 'http://www.topsk8.org/'}</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>  8601 Rainier Ave S</td>
-      <td> Alternative Schools</td>
-      <td> South Lake Hs</td>
-      <td>  47.52526</td>
-      <td> {'longitude': '-122.27092', 'latitude': '47.52...</td>
-      <td>  -122.27092</td>
-      <td> {'url': 'http://www.seattleschools.org/schools...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>     5215 46th Ave S</td>
-      <td> Alternative Schools</td>
-      <td>      Orca K-8</td>
-      <td>  47.55478</td>
-      <td> {'longitude': '-122.27596', 'latitude': '47.55...</td>
-      <td>  -122.27596</td>
-      <td>                 {'url': 'http://www.orcapta.org'}</td>
-    </tr>
-  </tbody>
-</table>
-</div><p>Now I will convert the longitude and latitude into zip codes using</p>
-<pre class="code python literal-block">
-<span class="kn">from</span> <span class="nn">geopy.geocoders</span> <span class="kn">import</span> <span class="n">Nominatim</span>
-<span class="n">geolocator</span> <span class="o">=</span> <span class="n">Nominatim</span><span class="p">()</span>
-<span class="n">lat</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
-<span class="n">lon</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
-<span class="n">query</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">lat</span> <span class="o">+</span>  <span class="s2">&quot;,&quot;</span><span class="o">+</span>  <span class="n">lon</span><span class="p">)</span>
-<span class="n">location</span> <span class="o">=</span> <span class="n">geolocator</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-<span class="n">location</span>
-</pre>
-<pre class="literal-block">
-Location(Madrona K-8 School, 1121, 33rd Avenue, Madrona, Seattle, King County, Washington, 98122, United States of America, (47.61227395, -122.290923054942, 0.0))
-</pre>
-<pre class="code python literal-block">
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'A simple chirp'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre>
-<img alt="" src="Article3_files/Article3_7_0.png" />
-
   </div>
-  <hr />
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'datamininginseattle.disqus.com';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 </article>
-<article>
-  <header>
-    <h2><a href="./the-second-article.html#the-second-article">The second article</a></h2>
-    <p>
-      Posted on Sat 01 December 2012 in <a href="./category/misc.html">misc</a> &#8226;
-      &#8226; <a href="./the-second-article.html#disqus_thread">Leave a comment</a>
-    </p>
-  </header>
-  <div>
-      <p>See below intra-site link examples in Markdown format.</p>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="./my-first-review.html#my-first-review">My First Review</a></h2>
-    <p>
-      Posted on Fri 03 December 2010 in <a href="./category/review.html">Review</a> &#8226;
-      &#8226; <a href="./my-first-review.html#disqus_thread">Leave a comment</a>
-    </p>
-  </header>
-  <div>
-      <p>Following is a review of my favorite mechanical keyboard.</p>
-  </div>
-</article>
-
-  <div class="pagination">
-  </div>
 
     <footer>
       <p>&copy; Data Mining in Seattle 2015</p>
@@ -818,21 +654,20 @@ Location(Madrona K-8 School, 1121, 33rd Avenue, Madrona, Seattle, King County, W
   </main>
 <script type="application/ld+json">
 {
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " DataScienceUsingRandPython ",
-  "url" : ".",
-  "image": "",
-  "description": ""
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "CourseraSentimentArticle",
+  "headline": "CourseraSentimentArticle",
+  "datePublished": "2016-02-02 10:02:00-08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Data Mining in Seattle",
+    "url": "./author/data-mining-in-seattle.html"
+  },
+  "image": "{{ SITEURL }}/theme/img/profile.png",
+  "url": "./courserasentimentarticle.html",
+  "description": "import graphlab Read some product review data products = graphlab.SFrame("/Users/zephryin/Desktop/amazon_baby.gl/") [INFO] [1;32m1448680580 : INFO: (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_FILE to /Users/zephryin/anaconda/envs/dato-env/lib/python2.7/site-packages/certifi/cacert.pem [0m[1;32m1448680580 : INFO: (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_DIR to [0mThis ..."
 }
-</script><script type="text/javascript">
-    var disqus_shortname = 'datamininginseattle.disqus.com';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
-</body>
+</script></body>
 </html>

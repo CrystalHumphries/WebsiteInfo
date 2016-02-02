@@ -43,7 +43,7 @@
         </ul>
       </nav>
       <ul class="social">
-        <li><a class="sc-twitter" href="http://twitter.com/zephryin" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-twitter" href="http://twitter.com/ce_humphries" target="_blank"><i class="fa fa-twitter"></i></a></li>
         <li><a class="sc-github" href="http://github.com/CrystalHumphries" target="_blank"><i class="fa fa-github"></i></a></li>
         <li><a class="sc-linkedin" href="https://www.linkedin.com/in/crystalhumphries" target="_blank"><i class="fa fa-linkedin"></i></a></li>
       </ul>
@@ -54,7 +54,7 @@
       <a href=".">Home</a>
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
-      <a href="crystal.humphries@gmail.com">Contact</a>
+      <a href="mailto:crystal.humphries@gmail.com">Contact</a>
     </nav>
 
 <article>
@@ -75,9 +75,9 @@ latitute and longitude into zip codes * practice working with pandas *
 doing some regression in python * creating a little visualization</p>
 <pre class="code python literal-block">
 <span class="kn">import</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">json</span>
-<span class="n">endpoint</span> <span class="o">=</span> <span class="s">&quot;https://data.seattle.gov/resource/82su-5fxf.json&quot;</span>
+<span class="n">endpoint</span> <span class="o">=</span> <span class="s2">&quot;https://data.seattle.gov/resource/82su-5fxf.json&quot;</span>
 
-<span class="n">repos</span>    <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="c"># this reads the data out in a dictionary</span>
+<span class="n">repos</span>    <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="c1"># this reads the data out in a dictionary</span>
 <span class="n">repos</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
 </pre>
 <pre class="literal-block">
@@ -180,7 +180,7 @@ put it into a dataframe</p>
 <span class="n">geolocator</span> <span class="o">=</span> <span class="n">Nominatim</span><span class="p">()</span>
 <span class="n">lat</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
 <span class="n">lon</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
-<span class="n">query</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">lat</span> <span class="o">+</span>  <span class="s">&quot;,&quot;</span><span class="o">+</span>  <span class="n">lon</span><span class="p">)</span>
+<span class="n">query</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">lat</span> <span class="o">+</span>  <span class="s2">&quot;,&quot;</span><span class="o">+</span>  <span class="n">lon</span><span class="p">)</span>
 <span class="n">location</span> <span class="o">=</span> <span class="n">geolocator</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 <span class="n">location</span>
 </pre>
@@ -196,7 +196,7 @@ Location(Madrona K-8 School, 1121, 33rd Avenue, Madrona, Seattle, King County, W
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'A simple chirp'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'A simple chirp'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre>
 <img alt="" src="Article3_files/Article3_7_0.png" />
