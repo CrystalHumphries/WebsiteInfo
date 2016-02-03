@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>CourseraSentimentArticle - DataScienceUsingRandPython</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./courserasentimentarticle.html">
+
+        <meta name="author" content="Data Scientist in Seattle" />
+        <meta name="description" content="import graphlab Read some product review data products = graphlab.SFrame(&#34;/Users/zephryin/Desktop/amazon_baby.gl/&#34;) [INFO] [1;32m1448680580 : INFO: (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_FILE to /Users/zephryin/anaconda/envs/dato-env/lib/python2.7/site-packages/certifi/cacert.pem [0m[1;32m1448680580 : INFO: (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_DIR to [0mThis ..." />
+
+        <meta property="og:site_name" content="DataScienceUsingRandPython" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="CourseraSentimentArticle"/>
+        <meta property="og:url" content="./courserasentimentarticle.html"/>
+        <meta property="og:description" content="import graphlab Read some product review data products = graphlab.SFrame(&#34;/Users/zephryin/Desktop/amazon_baby.gl/&#34;) [INFO] [1;32m1448680580 : INFO: (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_FILE to /Users/zephryin/anaconda/envs/dato-env/lib/python2.7/site-packages/certifi/cacert.pem [0m[1;32m1448680580 : INFO: (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_DIR to [0mThis ..."/>
+        <meta property="article:published_time" content="2016-02-02" />
+            <meta property="article:section" content="misc" />
+            <meta property="article:author" content="Data Scientist in Seattle" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+DataScienceUsingRandPython            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="mailto:crystal.humphries@gmail.com">Contact</a></li>
+                         <li><a href="./pages/about.html">
+                             About
+                          </a></li>
+                        <li class="active">
+                            <a href="./category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="./category/review.html">Review</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./courserasentimentarticle.html"
+                       rel="bookmark"
+                       title="Permalink to CourseraSentimentArticle">
+                        CourseraSentimentArticle
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-02-02T10:02:00-08:00"> Tue 02 February 2016</time>
+    </span>
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <div class="highlight"><pre><span class="kn">import</span> <span class="nn">graphlab</span>
+</pre></div>
+
+
+<h1>Read some product review data</h1>
+<div class="highlight"><pre><span class="n">products</span>  <span class="o">=</span> <span class="n">graphlab</span><span class="o">.</span><span class="n">SFrame</span><span class="p">(</span><span class="s2">&quot;/Users/zephryin/Desktop/amazon_baby.gl/&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre>[INFO] [1;32m1448680580 : INFO:     (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_FILE to /Users/zephryin/anaconda/envs/dato-env/lib/python2.7/site-packages/certifi/cacert.pem
+[0m[1;32m1448680580 : INFO:     (initialize_globals_from_environment:282): Setting configuration variable GRAPHLAB_FILEIO_ALTERNATIVE_SSL_CERT_DIR to 
+[0mThis non-commercial license of GraphLab Create is assigned to crystal.humphries@systemsbiology.org and will expire on November 04, 2016. For commercial licensing options, visit https://dato.com/buy/.
+
+[INFO] Start server at: ipc:///tmp/graphlab_server-3257 - Server binary: /Users/zephryin/anaconda/envs/dato-env/lib/python2.7/site-packages/graphlab/unity_server - Server log: /tmp/graphlab_server_1448680580.log
+[INFO] GraphLab Server Version: 1.7.1
+</pre></div>
+
+
+<h1>Let's explore this data together</h1>
+<div class="highlight"><pre><span class="n">products</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div style="max-height:1000px;max-width:1500px;overflow:auto;"><table frame="box" rules="cols">
+    <tr>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">name</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">review</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">rating</th>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Planetwise Flannel Wipes</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">These flannel wipes are<br>OK, but in my opinion ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">3.0</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Planetwise Wipe Pouch</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">it came early and was not<br>disappointed. i love ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Annas Dream Full Quilt<br>with 2 Shams ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Very soft and comfortable<br>and warmer than it ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Stop Pacifier Sucking<br>without tears with ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">This is a product well<br>worth the purchase.  I ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Stop Pacifier Sucking<br>without tears with ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">All of my kids have cried<br>non-stop when I tried to ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Stop Pacifier Sucking<br>without tears with ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">When the Binky Fairy came<br>to our house, we didn't ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">A Tale of Baby's Days<br>with Peter Rabbit ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Lovely book, it's bound<br>tightly so you may no ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">4.0</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Baby Tracker&amp;reg; - Daily<br>Childcare Journal, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Perfect for new parents.<br>We were able to keep ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Baby Tracker&amp;reg; - Daily<br>Childcare Journal, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">A friend of mine pinned<br>this product on Pinte ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Baby Tracker&amp;reg; - Daily<br>Childcare Journal, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">This has been an easy way<br>for my nanny to record ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">4.0</td>
+    </tr>
+</table>
+[10 rows x 3 columns]<br/>
+</div>
+
+<h1>Build the word count vector for each review</h1>
+<div class="highlight"><pre><span class="n">products</span><span class="p">[</span><span class="s1">&#39;word_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">graphlab</span><span class="o">.</span><span class="n">text_analytics</span><span class="o">.</span><span class="n">count_words</span><span class="p">(</span><span class="n">products</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="n">products</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div style="max-height:1000px;max-width:1500px;overflow:auto;"><table frame="box" rules="cols">
+    <tr>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">name</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">review</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">rating</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">word_count</th>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Planetwise Flannel Wipes</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">These flannel wipes are<br>OK, but in my opinion ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">3.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 5, '6': 1,<br>'stink': 1, 'because' ...</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Planetwise Wipe Pouch</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">it came early and was not<br>disappointed. i love ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 3, 'love': 1,<br>'it': 2, 'highly': 1, ...</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Annas Dream Full Quilt<br>with 2 Shams ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Very soft and comfortable<br>and warmer than it ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 2, 'quilt': 1,<br>'it': 1, 'comfortable': ...</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Stop Pacifier Sucking<br>without tears with ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">This is a product well<br>worth the purchase.  I ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'ingenious': 1, 'and':<br>3, 'love': 2, ...</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Stop Pacifier Sucking<br>without tears with ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">All of my kids have cried<br>non-stop when I tried to ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 2, 'parents!!':<br>1, 'all': 2, 'puppet.': ...</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Stop Pacifier Sucking<br>without tears with ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">When the Binky Fairy came<br>to our house, we didn't ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 2, 'this': 2,<br>'her': 1, 'help': 2, ...</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">A Tale of Baby's Days<br>with Peter Rabbit ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Lovely book, it's bound<br>tightly so you may no ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">4.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'shop': 1, 'noble': 1,<br>'is': 1, 'it': 1, 'as': ...</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Baby Tracker&amp;reg; - Daily<br>Childcare Journal, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Perfect for new parents.<br>We were able to keep ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 2, 'all': 1,<br>'right': 1, 'when': 1, ...</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Baby Tracker&amp;reg; - Daily<br>Childcare Journal, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">A friend of mine pinned<br>this product on Pinte ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 1, 'help': 1,<br>'give': 1, 'is': 1, ' ...</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Baby Tracker&amp;reg; - Daily<br>Childcare Journal, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">This has been an easy way<br>for my nanny to record ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">4.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'journal.': 1, 'nanny':<br>1, 'standarad': 1, ...</td>
+    </tr>
+</table>
+[10 rows x 4 columns]<br/>
+</div>
+
+<div class="highlight"><pre><span class="n">graphlab</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="s1">&#39;ipynb&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="n">products</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+
+<h1>Explore the  Vulli Sophie</h1>
+<div class="highlight"><pre><span class="n">giraffe_reviews</span> <span class="o">=</span> <span class="n">products</span><span class="p">[</span><span class="n">products</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Vulli Sophie the Giraffe Teether&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="nb">len</span><span class="p">(</span><span class="n">giraffe_reviews</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre>785
+</pre></div>
+
+
+<div class="highlight"><pre><span class="n">giraffe_reviews</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">view</span><span class="o">=</span><span class="s1">&#39;Categorical&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h1>Build a sentiment classifier</h1>
+<div class="highlight"><pre><span class="n">products</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">view</span><span class="o">=</span><span class="s1">&#39;Categorical&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>Define what's a positive and negative sentiment</h3>
+<div class="highlight"><pre><span class="c1"># ignore all 3 star reviews</span>
+<span class="n">products</span> <span class="o">=</span> <span class="n">products</span><span class="p">[</span><span class="n">products</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span><span class="o">!=</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="c1"># a positive sentiment = 4 or 5 star reviews</span>
+<span class="n">products</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">products</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">4</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="n">products</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div style="max-height:1000px;max-width:1500px;overflow:auto;"><table frame="box" rules="cols">
+    <tr>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">name</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">review</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">rating</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">word_count</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">sentiment</th>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Planetwise Wipe Pouch</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">it came early and was not<br>disappointed. i love ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 3, 'love': 1,<br>'it': 2, 'highly': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Annas Dream Full Quilt<br>with 2 Shams ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Very soft and comfortable<br>and warmer than it ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 2, 'quilt': 1,<br>'it': 1, 'comfortable': ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Stop Pacifier Sucking<br>without tears with ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">This is a product well<br>worth the purchase.  I ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'ingenious': 1, 'and':<br>3, 'love': 2, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Stop Pacifier Sucking<br>without tears with ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">All of my kids have cried<br>non-stop when I tried to ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 2, 'parents!!':<br>1, 'all': 2, 'puppet.': ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Stop Pacifier Sucking<br>without tears with ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">When the Binky Fairy came<br>to our house, we didn't ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 2, 'this': 2,<br>'her': 1, 'help': 2, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">A Tale of Baby's Days<br>with Peter Rabbit ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Lovely book, it's bound<br>tightly so you may no ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">4.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'shop': 1, 'noble': 1,<br>'is': 1, 'it': 1, 'as': ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Baby Tracker&amp;reg; - Daily<br>Childcare Journal, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Perfect for new parents.<br>We were able to keep ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 2, 'all': 1,<br>'right': 1, 'when': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Baby Tracker&amp;reg; - Daily<br>Childcare Journal, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">A friend of mine pinned<br>this product on Pinte ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 1, 'help': 1,<br>'give': 1, 'is': 1, ' ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Baby Tracker&amp;reg; - Daily<br>Childcare Journal, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">This has been an easy way<br>for my nanny to record ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">4.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'journal.': 1, 'nanny':<br>1, 'standarad': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Baby Tracker&amp;reg; - Daily<br>Childcare Journal, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">I love this journal and<br>our nanny uses it ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">4.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'all': 1, 'forget': 1,<br>'just': 1, 'food': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1</td>
+    </tr>
+</table>
+[10 rows x 5 columns]<br/>
+</div>
+
+<h2>Let's train the sentiment classifier</h2>
+<div class="highlight"><pre><span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">products</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="n">sentiment_model</span> <span class="o">=</span> <span class="n">graphlab</span><span class="o">.</span><span class="n">logistic_classifier</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;sentiment&#39;</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;word_count&#39;</span><span class="p">],</span> <span class="n">validation_set</span><span class="o">=</span><span class="n">test_data</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="n">PROGRESS</span><span class="o">:</span> <span class="n">Logistic</span> <span class="n">regression</span><span class="o">:</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">--------------------------------------------------------</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">examples</span>          <span class="o">:</span> <span class="mi">133448</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">classes</span>           <span class="o">:</span> <span class="mi">2</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">feature</span> <span class="n">columns</span>   <span class="o">:</span> <span class="mi">1</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">unpacked</span> <span class="n">features</span> <span class="o">:</span> <span class="mi">219217</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">coefficients</span>    <span class="o">:</span> <span class="mi">219218</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="n">Starting</span> <span class="n">L</span><span class="o">-</span><span class="n">BFGS</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">--------------------------------------------------------</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">+-----------+----------+-----------+--------------+-------------------+---------------------+</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">|</span> <span class="n">Iteration</span> <span class="o">|</span> <span class="n">Passes</span>   <span class="o">|</span> <span class="n">Step</span> <span class="n">size</span> <span class="o">|</span> <span class="n">Elapsed</span> <span class="n">Time</span> <span class="o">|</span> <span class="n">Training</span><span class="o">-</span><span class="n">accuracy</span> <span class="o">|</span> <span class="n">Validation</span><span class="o">-</span><span class="n">accuracy</span> <span class="o">|</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">+-----------+----------+-----------+--------------+-------------------+---------------------+</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">|</span> <span class="mi">1</span>         <span class="o">|</span> <span class="mi">5</span>        <span class="o">|</span> <span class="mf">0.000002</span>  <span class="o">|</span> <span class="mf">3.260698</span>     <span class="o">|</span> <span class="mf">0.841481</span>          <span class="o">|</span> <span class="mf">0.839989</span>            <span class="o">|</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">|</span> <span class="mi">2</span>         <span class="o">|</span> <span class="mi">9</span>        <span class="o">|</span> <span class="mf">3.000000</span>  <span class="o">|</span> <span class="mf">5.510144</span>     <span class="o">|</span> <span class="mf">0.947425</span>          <span class="o">|</span> <span class="mf">0.894877</span>            <span class="o">|</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">|</span> <span class="mi">3</span>         <span class="o">|</span> <span class="mi">10</span>       <span class="o">|</span> <span class="mf">3.000000</span>  <span class="o">|</span> <span class="mf">6.389937</span>     <span class="o">|</span> <span class="mf">0.923768</span>          <span class="o">|</span> <span class="mf">0.866232</span>            <span class="o">|</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">|</span> <span class="mi">4</span>         <span class="o">|</span> <span class="mi">11</span>       <span class="o">|</span> <span class="mf">3.000000</span>  <span class="o">|</span> <span class="mf">7.319430</span>     <span class="o">|</span> <span class="mf">0.971779</span>          <span class="o">|</span> <span class="mf">0.912743</span>            <span class="o">|</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">|</span> <span class="mi">5</span>         <span class="o">|</span> <span class="mi">12</span>       <span class="o">|</span> <span class="mf">3.000000</span>  <span class="o">|</span> <span class="mf">8.218626</span>     <span class="o">|</span> <span class="mf">0.975511</span>          <span class="o">|</span> <span class="mf">0.908900</span>            <span class="o">|</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">|</span> <span class="mi">6</span>         <span class="o">|</span> <span class="mi">13</span>       <span class="o">|</span> <span class="mf">3.000000</span>  <span class="o">|</span> <span class="mf">9.113033</span>     <span class="o">|</span> <span class="mf">0.899991</span>          <span class="o">|</span> <span class="mf">0.825967</span>            <span class="o">|</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">|</span> <span class="mi">7</span>         <span class="o">|</span> <span class="mi">15</span>       <span class="o">|</span> <span class="mf">1.000000</span>  <span class="o">|</span> <span class="mf">10.599032</span>    <span class="o">|</span> <span class="mf">0.984548</span>          <span class="o">|</span> <span class="mf">0.921451</span>            <span class="o">|</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">|</span> <span class="mi">8</span>         <span class="o">|</span> <span class="mi">16</span>       <span class="o">|</span> <span class="mf">1.000000</span>  <span class="o">|</span> <span class="mf">11.592858</span>    <span class="o">|</span> <span class="mf">0.985118</span>          <span class="o">|</span> <span class="mf">0.921871</span>            <span class="o">|</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">|</span> <span class="mi">9</span>         <span class="o">|</span> <span class="mi">17</span>       <span class="o">|</span> <span class="mf">1.000000</span>  <span class="o">|</span> <span class="mf">12.677084</span>    <span class="o">|</span> <span class="mf">0.987066</span>          <span class="o">|</span> <span class="mf">0.919709</span>            <span class="o">|</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">|</span> <span class="mi">10</span>        <span class="o">|</span> <span class="mi">18</span>       <span class="o">|</span> <span class="mf">1.000000</span>  <span class="o">|</span> <span class="mf">13.801504</span>    <span class="o">|</span> <span class="mf">0.988715</span>          <span class="o">|</span> <span class="mf">0.916256</span>            <span class="o">|</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="o">+-----------+----------+-----------+--------------+-------------------+---------------------+</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="n">TERMINATED</span><span class="o">:</span> <span class="n">Iteration</span> <span class="n">limit</span> <span class="n">reached</span><span class="o">.</span>
+<span class="n">PROGRESS</span><span class="o">:</span> <span class="n">This</span> <span class="n">model</span> <span class="n">may</span> <span class="n">not</span> <span class="n">be</span> <span class="n">optimal</span><span class="o">.</span> <span class="n">To</span> <span class="n">improve</span> <span class="n">it</span><span class="o">,</span> <span class="n">consider</span> <span class="n">increasing</span> <span class="err">`</span><span class="n">max_iterations</span><span class="err">`</span><span class="o">.</span>
+</pre></div>
+
+
+<h1>Evaluate the sentiment model</h1>
+<div class="highlight"><pre><span class="n">sentiment_model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;roc_curve&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre>{&#39;roc_curve&#39;: Columns:
+    threshold   float
+    fpr float
+    tpr float
+    p   int
+    n   int
+
+ Rows: 100001
+
+ Data:
+ +-----------+----------------+----------------+-------+------+
+ | threshold |      fpr       |      tpr       |   p   |  n   |
+ +-----------+----------------+----------------+-------+------+
+ |    0.0    |      1.0       |      1.0       | 27976 | 5328 |
+ |   1e-05   | 0.909346846847 | 0.998856162425 | 27976 | 5328 |
+ |   2e-05   | 0.896021021021 | 0.998748927652 | 27976 | 5328 |
+ |   3e-05   | 0.886448948949 | 0.998462968259 | 27976 | 5328 |
+ |   4e-05   | 0.879692192192 | 0.998284243637 | 27976 | 5328 |
+ |   5e-05   | 0.875187687688 | 0.998212753789 | 27976 | 5328 |
+ |   6e-05   | 0.872184684685 | 0.998177008865 | 27976 | 5328 |
+ |   7e-05   | 0.868618618619 | 0.998034029168 | 27976 | 5328 |
+ |   8e-05   | 0.864677177177 | 0.997998284244 | 27976 | 5328 |
+ |   9e-05   | 0.860735735736 | 0.997962539319 | 27976 | 5328 |
+ +-----------+----------------+----------------+-------+------+
+ [100001 rows x 5 columns]
+ Note: Only the head of the SFrame is printed.
+ You can use print_rows(num_rows=m, num_columns=n) to print more rows and columns.}
+</pre></div>
+
+
+<div class="highlight"><pre><span class="n">sentiment_model</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">view</span><span class="o">=</span><span class="s1">&#39;Evaluation&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h1>Applying the learned model to understand sentiment for our friend the Giraffe</h1>
+<div class="highlight"><pre><span class="n">giraffe_reviews</span><span class="p">[</span><span class="s1">&#39;predicted_sentiment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sentiment_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">giraffe_reviews</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s2">&quot;probability&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="n">giraffe_reviews</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div style="max-height:1000px;max-width:1500px;overflow:auto;"><table frame="box" rules="cols">
+    <tr>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">name</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">review</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">rating</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">word_count</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">predicted_sentiment</th>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">He likes chewing on all<br>the parts especially the ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 1, 'all': 1,<br>'because': 1, 'it': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999513023521</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">My son loves this toy and<br>fits great in the diaper ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 1, 'right': 1,<br>'help': 1, 'just': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999320678306</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">There really should be a<br>large warning on the  ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 2, 'all': 1,<br>'would': 1, 'latex.': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.013558811687</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">All the moms in my moms'<br>group got Sophie for ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 2, 'one!': 1,<br>'all': 1, 'love': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.995769474148</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">I was a little skeptical<br>on whether Sophie was ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 3, 'all': 1,<br>'months': 1, 'old': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.662374415673</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">I have been reading about<br>Sophie and was going  ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 6, 'seven': 1,<br>'already': 1, 'love': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999997148186</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">My neice loves her sophie<br>and has spent hours ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 4, 'drooling,':<br>1, 'love': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.989190989536</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">What a friendly face!<br>And those mesmerizing ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 3, 'chew': 1,<br>'be': 1, 'is': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999563518413</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">We got this just for my<br>son to chew on instea ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'chew': 2, 'seemed': 1,<br>'because': 1, 'about.': ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.970160542725</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">My baby seems to like<br>this toy, but I could ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">3.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 2, 'already': 1,<br>'some': 1, 'it': 3, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.195367644588</td>
+    </tr>
+</table>
+[10 rows x 5 columns]<br/>
+</div>
+
+<h1>Sort the reviews based on the predicted sentiment and explore</h1>
+<div class="highlight"><pre><span class="n">giraffe_reviews</span> <span class="o">=</span> <span class="n">giraffe_reviews</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">&quot;predicted_sentiment&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">giraffe_reviews</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div style="max-height:1000px;max-width:1500px;overflow:auto;"><table frame="box" rules="cols">
+    <tr>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">name</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">review</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">rating</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">word_count</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">predicted_sentiment</th>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Sophie, oh Sophie, your<br>time has come. My ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'giggles': 1, 'all': 1,<br>"violet's": 2, 'bring': ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">1.0</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">I'm not sure why Sophie<br>is such a hit with the ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">4.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'adoring': 1, 'find': 1,<br>'month': 1, 'bright': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999999999703</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">I'll be honest...I bought<br>this toy because all the ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">4.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'all': 2, 'discovered':<br>1, 'existence.': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999999999392</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">We got this little<br>giraffe as a gift from a ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'all': 2, "don't": 1,<br>'(literally).so': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.99999999919</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">As a mother of 16month<br>old twins; I bought ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'cute': 1, 'all': 1,<br>'reviews.': 2, 'just' ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999999998657</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Sophie the Giraffe is the<br>perfect teething toy. ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'just': 2, 'both': 1,<br>'month': 1, 'ears,': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999999997108</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Sophie la giraffe is<br>absolutely the best toy ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 5, 'the': 1,<br>'all': 1, 'that': 2, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999999995589</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">My 5-mos old son took to<br>this immediately. The ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'just': 1, 'shape': 2,<br>'mutt': 1, '"dog': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999999995573</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">My nephews and my four<br>kids all had Sophie in ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'and': 4, 'chew': 1,<br>'all': 1, 'perfect;': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999999989527</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Vulli Sophie the Giraffe<br>Teether ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Never thought I'd see my<br>son French kissing a ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">5.0</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">{'giggles': 1, 'all': 1,<br>'out,': 1, 'over': 1, ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">0.999999985069</td>
+    </tr>
+</table>
+[10 rows x 5 columns]<br/>
+</div>
+
+<div class="highlight"><pre><span class="n">giraffe_reviews</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;review&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre>&quot;Sophie, oh Sophie, your time has come. My granddaughter, Violet is 5 months old and starting to teeth. What joy little Sophie brings to Violet. Sophie is made of a very pliable rubber that is sturdy but not tough. It is quite easy for Violet to twist Sophie into unheard of positions to get Sophie into her mouth. The little nose and hooves fit perfectly into small mouths, and the drooling has purpose. The paint on Sophie is food quality.Sophie was born in 1961 in France. The maker had wondered why there was nothing available for babies and made Sophie from the finest rubber, phthalate-free on St Sophie&#39;s Day, thus the name was born. Since that time millions of Sophie&#39;s populate the world. She is soft and for babies little hands easy to grasp. Violet especially loves the bumpy head and horns of Sophie. Sophie has a long neck that easy to grasp and twist. She has lovely, sizable spots that attract Violet&#39;s attention. Sophie has happy little squeaks that bring squeals of delight from Violet. She is able to make Sophie squeak and that brings much joy. Sophie&#39;s smooth skin is soothing to Violet&#39;s little gums. Sophie is 7 inches tall and is the exact correct size for babies to hold and love.As you well know the first thing babies grasp, goes into their mouths- how wonderful to have a toy that stimulates all of the senses and helps with the issue of teething. Sophie is small enough to fit into any size pocket or bag. Sophie is the perfect find for babies from a few months to a year old. How wonderful to hear the giggles and laughs that emanate from babies who find Sophie irresistible. Viva La Sophie!Highly Recommended.  prisrob 12-11-09&quot;
+</pre></div>
+
+
+<div class="highlight"><pre><span class="n">giraffe_reviews</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;review&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre>&quot;I&#39;m not sure why Sophie is such a hit with the little ones, but my 7 month old baby girl is one of her adoring fans.  The rubber is softer and more pleasant to handle, and my daughter has enjoyed chewing on her legs and the nubs on her head even before she started teething.  She also loves the squeak that Sophie makes when you squeeze her.  Not sure what it is but if Sophie is amongst a pile of her other toys, my daughter will more often than not reach for Sophie.  And I have the peace of mind of knowing that only edible and safe paints and materials have been used to make Sophie, as opposed to Bright Starts and other baby toys made in China.  Now that the research is out on phthalates and other toxic substances in baby toys, I think it&#39;s more important than ever to find good quality toys that are also safe for our babies to handle and put in their mouths.  Sophie is a must-have for every new mom in my opinion.  Even if your kid is one of the few that can take or leave her, it&#39;s worth a try.  Vulli, the makers of Sophie, also make natural rubber teething rings that my daughter loves as well.&quot;
+</pre></div>
+
+
+<div class="highlight"><pre><span class="n">giraffe_reviews</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;review&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="s">&quot;My son (now 2.5) LOVED his Sophie, and I bought one for every baby shower I&#39;ve gone to. Now, my daughter (6 months) just today nearly choked on it and I will never give it to her again. Had I not been within hearing range it could have been fatal. The strange sound she was making caught my attention and when I went to her and found the front curved leg shoved well down her throat and her face a purply/blue I panicked. I pulled it out and she vomited all over the carpet before screaming her head off. I can&#39;t believe how my opinion of this toy has changed from a must-have to a must-not-use. Please don&#39;t disregard any of the choking hazard comments, they are not over exaggerated!&quot;</span>
+</pre></div>
+
+
+<div class="highlight"><pre>
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'datamininginseattle.disqus.com'; // required: replace example with your forum shortname
+
+                    var disqus_identifier = 'courserasentimentarticle';
+                var disqus_url = './courserasentimentarticle.html';
+
+            var disqus_config = function () {
+                this.language = "en";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="http://twitter.com/ce_humphries"><i class="fa fa-twitter-square fa-lg"></i> twitter</a></li>
+                <li class="list-group-item"><a href="http://github.com/CrystalHumphries"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+                <li class="list-group-item"><a href="https://www.linkedin.com/in/crystalhumphries"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="list-group-item"><a href="./"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Data Scientist in Seattle
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'datamininginseattle.disqus.com'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+
+</body>
+</html>
