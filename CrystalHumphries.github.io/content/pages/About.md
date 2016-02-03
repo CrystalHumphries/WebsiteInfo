@@ -1,0 +1,40 @@
+Title: About
+Date: 2015-08-26 18:00
+Category: About
+
+This blog is documenting my journey to improve my skills as a data scientist. 
+Feel free to post your comments and/or questions below each blog entry. 
+
+**Me:**
+
+I am a budding data scientist living in Seattle.
+
+**Current Skills:**
+
+I have a PhD in Human Genetics and Genomics. During my PhD I taught myself programing and applied a lot of knowledge gained from JHU's MOOC towards data analysis. Up until recently, I was using my skills to mine data on health care records and 'OMIC (e.g. whole genome, RNA-seq, etc.) datato improve diagnosis.
+
+**The Goal of this Blog is to:**
+     	 
+	 A) Answer some interesting questions 
+	 B) Show how one goes from being a post-doc to a data scientist (I hope)
+	 C) Points out steps needed along my journey
+	 D) Find some others out there that have similar interests
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**Feel free to post your comments and/or questions below each blog entry**
+
