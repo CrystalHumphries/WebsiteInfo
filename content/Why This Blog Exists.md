@@ -29,10 +29,13 @@ This is the syllabus for the course:
     Week 7 - Hadoop, Hive, and MapReduce
     Week 8 - Data Visualization with D3.js, Data Products, and Fraud Detection Case Study
 
-During each week,
-A) Summarize what I learned and B) I will highlight one or two examples to share
+During each week I will,
+
+A) Summarize the lessons learned and
+B) Highlight one or two examples to share
 
 In the (unlikley) event I have free time, I will do a similar analysis online on freely available data. 
 
+   Freely available data sets: https://github.com/caesar0301/awesome-public-datasets
 
 *I frequently use arrays and hashes. I know of trees, stacks, and queues, but I have not used them often. 
