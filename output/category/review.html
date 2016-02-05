@@ -72,9 +72,43 @@ Data Scientist in Seattle            </a>
         <div class="col-sm-9">
 
             <article>
-                <h2><a href="../the-second-article.html">The second article</a></h2>
+                <h2><a href="../sentiment-analysis.html">Sentiment Analysis</a></h2>
+                <div class="summary"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">graphlab</span>
+</pre></div>
+
+
+<h1>Read some product review data</h1>
+<div class="highlight"><pre><span class="n">products</span>  <span class="o">=</span> <span class="n">graphlab</span><span class="o">.</span><span class="n">SFrame</span><span class="p">(</span><span class="s2">&quot;~/path/amazon_baby.gl/&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h1>Let's explore this data together</h1>
+<div class="highlight"><pre><span class="n">products</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div style="max-height:1000px;max-width:1500px;overflow:auto;"><table frame="box" rules="cols">
+    <tr>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">name</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">review</th>
+        <th style="padding-left: 1em; padding-right: 1em; text-align: center">rating</th>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Planetwise Flannel Wipes</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">These flannel wipes are<br>OK, but in my opinion ...</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">3.0</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">Planetwise Wipe Pouch</td>
+        <td style="padding-left: 1em; padding-right: 1em; text-align: center; vertical-align: top">it came early and was not<br>disappointed. i love ...</td></tr></table></div>
+                    <a class="btn btn-default btn-xs" href="../sentiment-analysis.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../dataquestio.html">Dataquest.io</a></h2>
                 <div class="summary"><p>See below intra-site link examples in Markdown format.</p>
-                    <a class="btn btn-default btn-xs" href="../the-second-article.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="../dataquestio.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -96,8 +130,13 @@ Data Scientist in Seattle            </a>
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
-                        <a href="../the-second-article.html">
-                            The second article
+                        <a href="../sentiment-analysis.html">
+                            Sentiment Analysis
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="../dataquestio.html">
+                            Dataquest.io
                         </a>
                     </li>
                 </ul>
@@ -132,7 +171,7 @@ Data Scientist in Seattle            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2012 Crystal Humphries
+         <div class="col-xs-10">&copy; 2015 Crystal Humphries
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

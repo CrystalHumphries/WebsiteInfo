@@ -1,7 +1,7 @@
-Title: Coursera Sentiment Article
+Title: Sentiment Analysis
 Date: 2015-12-02 10:02
-Category: Articles
-Tags: Learning, Sentiment, Coursera
+Category: Review
+Tags: Self-Learning, Sentiment, Coursera, Dato
 
 ```python
 import graphlab
